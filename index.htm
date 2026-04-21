@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elcan Məmmədov - Texnologiya Həlləri 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --black: #1a1a1a;
+        --cream: #f5f0e8;
+        --lime: #c8f55a;
+        --gray-bg: #e8e4dc;
+        --muted: rgba(245, 240, 232, 0.45);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Barlow", sans-serif;
+        background: var(--gray-bg);
+        color: var(--black);
+        overflow-x: hidden;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        background: var(--black);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+        height: 56px;
+      }
+      .nav-logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        color: var(--lime);
+        letter-spacing: 2px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: rgba(245, 240, 232, 0.55);
+        text-decoration: none;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 400;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--lime);
+      }
+      .nav-cta {
+        background: var(--lime) !important;
+        color: var(--black) !important;
+        padding: 7px 18px;
+        border-radius: 100px;
+        font-weight: 600 !important;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--cream);
+        border-radius: 2px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 56px 0 0 0;
+        background: var(--black);
+        z-index: 199;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        color: var(--cream);
+        text-decoration: none;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 38px;
+        letter-spacing: 2px;
+        transition: color 0.2s;
+      }
+      .mobile-menu a:hover {
+        color: var(--lime);
+      }
+      .mobile-menu .m-cta {
+        background: var(--lime);
+        color: var(--black) !important;
+        padding: 12px 40px;
+        border-radius: 100px;
+        font-family: "Barlow", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* HERO */
+      .hero {
+        background: var(--black);
+        min-height: 100vh;
+        padding: 120px 24px 80px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .hero-bg-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(150px, 38vw, 380px);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(245, 240, 232, 0.05);
+        position: absolute;
+        right: -10px;
+        bottom: -20px;
+        letter-spacing: -10px;
+        user-select: none;
+        pointer-events: none;
+      }
+      .hero-badge {
+        display: inline-block;
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        color: rgba(245, 240, 232, 0.45);
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 2px;
+        margin-bottom: 24px;
+        width: fit-content;
+      }
+      .hero-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(52px, 13vw, 110px);
+        line-height: 0.92;
+        color: var(--cream);
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-title .lime {
+        color: var(--lime);
+      }
+      .hero-sub {
+        font-size: clamp(13px, 3.5vw, 15px);
+        color: var(--muted);
+        font-weight: 300;
+        margin: 20px 0 36px;
+        line-height: 1.7;
+        max-width: 440px;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-primary {
+        background: var(--lime);
+        color: var(--black);
+        font-family: "Barlow", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 14px 28px;
+        border-radius: 100px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        white-space: nowrap;
+        text-align: center;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200, 245, 90, 0.3);
+      }
+      .btn-outline {
+        background: transparent;
+        color: rgba(245, 240, 232, 0.6);
+        font-family: "Barlow", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 14px 28px;
+        border-radius: 100px;
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+        white-space: nowrap;
+        text-align: center;
+      }
+      .btn-outline:hover {
+        border-color: var(--lime);
+        color: var(--lime);
+      }
+
+      /* AUTHOR */
+      .author-strip {
+        background: var(--lime);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .author-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 17px;
+        color: var(--lime);
+        letter-spacing: 1px;
+        flex-shrink: 0;
+      }
+      .author-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: var(--black);
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .author-role {
+        font-size: 10px;
+        color: rgba(26, 26, 26, 0.55);
+        font-weight: 300;
+        letter-spacing: 1px;
+        margin-top: 3px;
+      }
+      .author-right {
+        font-size: 10px;
+        color: rgba(26, 26, 26, 0.45);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .wave {
+        display: block;
+        width: 100%;
+        background: var(--lime);
+      }
+      .wave svg {
+        display: block;
+      }
+
+      /* SECTIONS */
+      .section {
+        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 10px;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(34px, 7vw, 52px);
+        color: var(--black);
+        letter-spacing: 1px;
+        margin-bottom: 32px;
+        line-height: 1;
+      }
+
+      /* SERVICES */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        border: 1.5px solid var(--black);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .srv-card {
+        padding: 20px 18px;
+        border-right: 1px solid var(--black);
+        border-bottom: 1px solid var(--black);
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: var(--cream);
+        transition: background 0.2s;
+      }
+      .srv-card:hover {
+        background: #ece7df;
+      }
+      .srv-card:nth-child(even) {
+        border-right: none;
+      }
+      .srv-card:nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+      .srv-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(200, 245, 90, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .srv-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: #7aaa20;
+        stroke-width: 1.6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .srv-card:hover .srv-icon {
+        background: rgba(200, 245, 90, 0.22);
+      }
+      .srv-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--black);
+        line-height: 1.3;
+      }
+      .srv-desc {
+        font-size: 11px;
+        font-weight: 300;
+        color: #888;
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+
+      /* PRICING */
+      .pricing-section {
+        background: var(--cream);
+        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+      }
+      .pricing-inner {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .price-card {
+        background: #f5f0e8;
+        border: 1.5px solid #d8d3cb;
+        border-radius: 10px;
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .price-card:hover {
+        transform: translateY(-4px);
+        border-color: #a8a39b;
+      }
+      .price-card.featured {
+        background: var(--black);
+        border-color: var(--lime);
+      }
+
+      .price-badge {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--black);
+        background: var(--lime);
+        padding: 4px 12px;
+        border-radius: 100px;
+        display: inline-block;
+        margin-bottom: 14px;
+        width: fit-content;
+      }
+      .price-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        color: var(--black);
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .price-card.featured .price-name {
+        color: var(--cream);
+      }
+
+      .price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
+        line-height: 1;
+      }
+      .price-amount {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(36px, 6vw, 52px);
+        color: var(--black);
+        letter-spacing: -1px;
+      }
+      .price-card.featured .price-amount {
+        color: var(--lime);
+      }
+      .price-currency {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(16px, 3vw, 22px);
+        color: #aaa;
+        letter-spacing: 1px;
+      }
+      .price-card.featured .price-currency {
+        color: rgba(200, 245, 90, 0.5);
+      }
+      .price-amount-text {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(26px, 5vw, 40px);
+        color: var(--black);
+      }
+      .price-card.featured .price-amount-text {
+        color: var(--lime);
+      }
+
+      .price-period {
+        font-size: 10px;
+        color: #999;
+        font-weight: 300;
+        margin-bottom: 20px;
+        margin-top: 4px;
+      }
+      .price-card.featured .price-period {
+        color: rgba(245, 240, 232, 0.4);
+      }
+      .price-divider {
+        height: 1px;
+        background: #d8d3cb;
+        margin-bottom: 18px;
+      }
+      .price-card.featured .price-divider {
+        background: rgba(245, 240, 232, 0.1);
+      }
+      .price-features {
+        list-style: none;
+        flex: 1;
+      }
+      .price-features li {
+        font-size: 11px;
+        font-weight: 400;
+        color: #555;
+        padding: 6px 0;
+        border-bottom: 1px solid #ede9e1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .price-card.featured .price-features li {
+        color: rgba(245, 240, 232, 0.65);
+        border-bottom-color: rgba(245, 240, 232, 0.07);
+      }
+      .price-features li:last-child {
+        border-bottom: none;
+      }
+      .check {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--lime);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--black);
+      }
+      .check svg {
+        width: 8px;
+        height: 8px;
+        display: block;
+      }
+      .price-card.featured .check {
+        background: rgba(200, 245, 90, 0.15);
+      }
+      .price-card.featured .check svg {
+        stroke: var(--lime);
+      }
+      .price-btn {
+        margin-top: 24px;
+        display: block;
+        text-align: center;
+        padding: 12px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1.5px solid var(--black);
+        color: var(--black);
+        background: transparent;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .price-btn:hover {
+        background: var(--black);
+        color: var(--cream);
+      }
+      .price-card.featured .price-btn {
+        background: var(--lime);
+        color: var(--black);
+        border-color: var(--lime);
+      }
+      .price-card.featured .price-btn:hover {
+        background: #b8e04a;
+        border-color: #b8e04a;
+      }
+      .price-note {
+        font-size: 11px;
+        color: #999;
+        font-weight: 300;
+        text-align: center;
+        margin-top: 20px;
+        line-height: 1.6;
+      }
+
+      /* PERKS */
+      .perks-section {
+        background: var(--black);
+        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+      }
+      .perks-inner {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .perks-section .section-label {
+        color: rgba(245, 240, 232, 0.35);
+      }
+      .perks-section .section-title {
+        color: var(--cream);
+      }
+      .perks-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .perk-card {
+        border: 1px solid rgba(245, 240, 232, 0.08);
+        border-radius: 8px;
+        padding: 28px 16px;
+        text-align: center;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .perk-card:hover {
+        border-color: rgba(200, 245, 90, 0.3);
+        transform: translateY(-3px);
+      }
+      .perk-card.lime-card {
+        background: var(--lime);
+        border-color: var(--lime);
+      }
+      .perk-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        background: rgba(245, 240, 232, 0.07);
+        flex-shrink: 0;
+      }
+      .perk-card.lime-card .perk-icon {
+        background: rgba(26, 26, 26, 0.12);
+      }
+      .perk-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--cream);
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .perk-card.lime-card .perk-icon svg {
+        stroke: var(--black);
+      }
+      .perk-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--cream);
+        line-height: 1.35;
+      }
+      .perk-card.lime-card .perk-title {
+        color: var(--black);
+      }
+      .perk-sub {
+        font-size: 11px;
+        color: rgba(245, 240, 232, 0.4);
+        margin-top: 6px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .perk-card.lime-card .perk-sub {
+        color: rgba(26, 26, 26, 0.55);
+      }
+
+      /* CTA */
+      .cta-section {
+        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .cta-box {
+        background: var(--black);
+        border-radius: 10px;
+        padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 40px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .cta-big {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(30px, 7vw, 44px);
+        color: var(--lime);
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .cta-small {
+        font-size: 13px;
+        color: rgba(245, 240, 232, 0.4);
+        font-weight: 300;
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--black);
+        border-top: 1px solid rgba(245, 240, 232, 0.06);
+        padding: 20px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .footer-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .ftag {
+        font-size: 10px;
+        color: rgba(245, 240, 232, 0.25);
+        letter-spacing: 0.5px;
+      }
+      .footer-year {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 14px;
+        color: rgba(245, 240, 232, 0.2);
+        letter-spacing: 2px;
+      }
+
+      /* ── MOBILE RESPONSIVE ── */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+
+        /* Hero buttons stacked */
+        .hero-buttons {
+          flex-direction: column;
+        }
+        .hero-buttons .btn-primary,
+        .hero-buttons .btn-outline {
+          width: 100%;
+        }
+
+        /* Services: single column */
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        .srv-card {
+          border-right: none !important;
+        }
+        .srv-card:nth-last-child(-n + 2) {
+          border-bottom: 1px solid var(--black) !important;
+        }
+        .srv-card:last-child {
+          border-bottom: none !important;
+        }
+
+        /* Pricing: single column, featured first */
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-card.featured {
+          order: -1;
+        }
+
+        /* Perks: row layout on mobile */
+        .perks-grid {
+          grid-template-columns: 1fr;
+        }
+        .perk-card {
+          flex-direction: row;
+          text-align: left;
+          padding: 20px 18px;
+          gap: 16px;
+        }
+        .perk-icon {
+          margin: 0;
+        }
+
+        /* CTA: stacked */
+        .cta-box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .cta-box .btn-primary {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .author-right {
+          display: none;
+        }
+        .footer-tags {
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-logo">Elcan Məmmədov</div>
+      <ul class="nav-links">
+        <li><a href="#xidmetler">Xidmətlər</a></li>
+        <li><a href="#qiymet">Qiymət</a></li>
+        <li><a href="#ustunlukler">Üstünlüklər</a></li>
+        <li><a href="#elaqe" class="nav-cta">Əlaqə</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menyu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#xidmetler" class="mob-link">Xidmətlər</a>
+      <a href="#qiymet" class="mob-link">Qiymət</a>
+      <a href="#ustunlukler" class="mob-link">Üstünlüklər</a>
+      <a href="#elaqe" class="mob-link m-cta">Əlaqə</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-bg-num">8</div>
+      <div class="hero-badge">Tam Həll Paketi · 2026</div>
+      <h1 class="hero-title">
+        Biznesinizi<br />
+        <span class="lime">Rəqəmsal</span><br />
+        Dünyaya<br />
+        Daşıyırıq.
+      </h1>
+      <p class="hero-sub">
+        Veb saytdan süni intellektə — ERP-dən onlayn təhsilə qədər bütün
+        xidmətlər sizin üçün.
+      </p>
+      <div class="hero-buttons">
+        <a href="#elaqe" class="btn-primary">Pulsuz Məsləhət Al</a>
+        <a href="#xidmetler" class="btn-outline">Xidmətlərə Bax</a>
+      </div>
+    </section>
+
+    <div class="author-strip">
+      <div class="author-left">
+        <div class="avatar">EM</div>
+        <div>
+          <div class="author-name">Elcan Məmmədov</div>
+          <div class="author-role">Texnologiya &amp; Biznes Həlləri</div>
+        </div>
+      </div>
+      <div class="author-right">elcan.dev</div>
+    </div>
+
+    <div class="wave">
+      <svg
+        viewBox="0 0 1440 40"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        height="40"
+      >
+        <rect width="1440" height="40" fill="#e8e4dc" />
+        <path
+          d="M0,0 Q360,40 720,20 Q1080,0 1440,30 L1440,0 Z"
+          fill="#c8f55a"
+        />
+      </svg>
+    </div>
+
+    <div id="xidmetler" style="background: var(--gray-bg)">
+      <div class="section">
+        <div class="section-label">Nə Təklif Edirik</div>
+        <div class="section-title">Xidmətlər</div>
+        <div class="services-grid">
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4M7 7h.01M11 7h6M7 11h10" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">Peşəkar Veb Sayt</div>
+              <div class="srv-desc">
+                İstənilən növ biznes üçün fərdi dizayn və funksional sayt
+              </div>
+            </div>
+          </div>
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="7" width="6" height="10" rx="1" />
+                <rect x="9" y="3" width="6" height="14" rx="1" />
+                <rect x="16" y="9" width="6" height="8" rx="1" />
+                <path d="M5 21h14" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">ERP &amp; CRM İnteqrasiyası</div>
+              <div class="srv-desc">
+                İş proseslərinin tam inteqrasiyası və optimallaşdırılması
+              </div>
+            </div>
+          </div>
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M12 3v2M12 19v2M3 12h2M19 12h2M5.64 5.64l1.42 1.42M16.95 16.95l1.41 1.41M5.64 18.36l1.42-1.42M16.95 7.05l1.41-1.41"
+                />
+                <circle cx="12" cy="12" r="7" stroke-dasharray="2 2" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">Süni İntellekt (AI)</div>
+              <div class="srv-desc">
+                AI inteqrasiyası və avtomatlaşdırma həlləri
+              </div>
+            </div>
+          </div>
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M2 8l10 7 10-7" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">Korporativ E-poçt</div>
+              <div class="srv-desc">
+                Brend ünvanların yaradılması, quraşdırılması və idarə edilməsi
+              </div>
+            </div>
+          </div>
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+                <line x1="14" y1="4" x2="10" y2="20" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">Onlayn Proqramlaşdırma</div>
+              <div class="srv-desc">
+                Müasir proqramlaşdırma dərsləri və mentorluq
+              </div>
+            </div>
+          </div>
+          <div class="srv-card">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+            </div>
+            <div>
+              <div class="srv-name">Texniki Dəstək</div>
+              <div class="srv-desc">
+                1 il müddətində fasiləsiz tam texniki xidmət
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="qiymet" class="pricing-section">
+      <div class="pricing-inner">
+        <div class="section-label">Sərfəli Paketlər</div>
+        <div class="section-title">Qiymət Siyahısı</div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-name">Başlanğıc</div>
+            <div class="price-row">
+              <div class="price-amount">499</div>
+              <div class="price-currency">AZN</div>
+            </div>
+            <div class="price-period">bir dəfəlik ödəniş</div>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >5 səhifəlik veb sayt
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Mobil uyğunluq
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Korporativ e-poçt
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Domen + Hosting (1 il)
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >3 ay texniki dəstək
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/994504180032"
+              target="_blank"
+              class="price-btn"
+              >Seçim et</a
+            >
+          </div>
+
+          <div class="price-card featured">
+            <div class="price-badge">Ən Populyar</div>
+            <div class="price-name">Biznes</div>
+            <div class="price-row">
+              <div class="price-amount">999</div>
+              <div class="price-currency">AZN</div>
+            </div>
+            <div class="price-period">bir dəfəlik ödəniş</div>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Limitsiz səhifə
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >ERP / CRM inteqrasiyası
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >AI inteqrasiyası
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Korporativ e-poçt
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Domen + Hosting (1 il)
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >1 il texniki dəstək
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Hissə-hissə ödəniş
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/994504180032"
+              target="_blank"
+              class="price-btn"
+              >Seçim et</a
+            >
+          </div>
+
+          <div class="price-card">
+            <div class="price-name">Korporativ</div>
+            <div class="price-row">
+              <div class="price-amount-text">Fərdi</div>
+            </div>
+            <div class="price-period">Layihəyə görə qiymət</div>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Tam fərdi həll
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >ERP + CRM + AI
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Onlayn proqramlaşdırma
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Dedicated dəstək
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Domen + Hosting (1 il)
+              </li>
+              <li>
+                <span class="check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Özəl ödəniş planı
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/994504180032"
+              target="_blank"
+              class="price-btn"
+              >Əlaqə saxla</a
+            >
+          </div>
+        </div>
+        <p class="price-note">
+          Bütün paketlərdə hissə-hissə ödəniş imkanı var — pulsuz məsləhət üçün
+          bizimlə əlaqə saxlayın.
+        </p>
+      </div>
+    </div>
+
+    <section id="ustunlukler" class="perks-section">
+      <div class="perks-inner">
+        <div class="section-label">Niyə Biz</div>
+        <div class="section-title">Üstünlüklərimiz</div>
+        <div class="perks-grid">
+          <div class="perk-card lime-card">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 12V22H4V12" />
+                <path d="M22 7H2v5h20V7z" />
+                <path d="M12 22V7" />
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+              </svg>
+            </div>
+            <div>
+              <div class="perk-title">Domen + Hosting Hədiyyə</div>
+              <div class="perk-sub">
+                İlk il tamamilə pulsuz — xərclərini azaldırıq
+              </div>
+            </div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
+                <path d="M7 15h2M11 15h6" />
+              </svg>
+            </div>
+            <div>
+              <div class="perk-title">Hissə-hissə Ödəniş</div>
+              <div class="perk-sub">Büdcənizə uyğun çevik ödəniş planı</div>
+            </div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polyline points="9 12 11 14 15 10" />
+              </svg>
+            </div>
+            <div>
+              <div class="perk-title">1 İl Texniki Dəstək</div>
+              <div class="perk-sub">
+                Layihə təslimindən sonra tam bir il yanınızdayıq
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="elaqe">
+      <div class="cta-section">
+        <div class="cta-box">
+          <div>
+            <div class="cta-big">Pulsuz Məsləhət</div>
+            <div class="cta-small">
+              Layihənizi birlikdə planlaşdırırıq — heç bir öhdəçilik yoxdur
+            </div>
+          </div>
+          <a
+            href="https://wa.me/994504180032"
+            target="_blank"
+            class="btn-primary"
+            >Əlaqə Saxla →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-tags">
+        <span class="ftag">#WebDesign</span>
+        <span class="ftag">#ERP</span>
+        <span class="ftag">#AI</span>
+        <span class="ftag">#Texnologiya</span>
+        <span class="ftag">#Azərbaycan</span>
+        <span class="ftag">#ElcanMəmmədov</span>
+      </div>
+      <span class="footer-year">© 2026</span>
+    </footer>
+
+    <script>
+      const btn = document.getElementById("hamburger");
+      const menu = document.getElementById("mobileMenu");
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("open");
+        menu.classList.toggle("open");
+        document.body.style.overflow = menu.classList.contains("open")
+          ? "hidden"
+          : "";
+      });
+      document.querySelectorAll(".mob-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          btn.classList.remove("open");
+          menu.classList.remove("open");
+          document.body.style.overflow = "";
+        });
+      });
+    </script>
+  </body>
+</html>
