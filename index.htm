@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elcan Məmmədov - Texnologiya Həlləri 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       *,
       *::before,
@@ -24,7 +30,6 @@
       }
       body {
         font-family: "Barlow", "Arial", "Helvetica", sans-serif;
-
         background: var(--gray-bg);
         color: var(--black);
         overflow-x: hidden;
@@ -45,10 +50,12 @@
         height: 56px;
       }
       .nav-logo {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: 20px;
+        font-weight: 600;
         color: var(--lime);
         letter-spacing: 2px;
+        text-transform: uppercase;
       }
       .nav-links {
         display: flex;
@@ -121,9 +128,11 @@
       .mobile-menu a {
         color: var(--cream);
         text-decoration: none;
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: 38px;
+        font-weight: 700;
         letter-spacing: 2px;
+        text-transform: uppercase;
         transition: color 0.2s;
       }
       .mobile-menu a:hover {
@@ -153,8 +162,9 @@
         justify-content: center;
       }
       .hero-bg-num {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: clamp(150px, 38vw, 380px);
+        font-weight: 700;
         line-height: 1;
         color: transparent;
         -webkit-text-stroke: 1px rgba(245, 240, 232, 0.05);
@@ -169,20 +179,22 @@
         display: inline-block;
         border: 1px solid rgba(245, 240, 232, 0.2);
         color: rgba(245, 240, 232, 0.45);
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 3px;
         text-transform: uppercase;
-        padding: 6px 14px;
+        padding: 7px 14px;
         border-radius: 2px;
         margin-bottom: 24px;
         width: fit-content;
       }
       .hero-title {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: clamp(52px, 13vw, 110px);
-        line-height: 0.92;
+        line-height: 1.2;
         color: var(--cream);
         letter-spacing: 1px;
+        text-transform: uppercase;
         position: relative;
         z-index: 2;
       }
@@ -193,7 +205,7 @@
         font-size: clamp(13px, 3.5vw, 15px);
         color: var(--muted);
         font-weight: 300;
-        margin: 20px 0 36px;
+        margin: 40px 0 36px;
         line-height: 1.7;
         max-width: 440px;
         position: relative;
@@ -279,18 +291,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: 17px;
+        font-weight: 600;
         color: var(--lime);
         letter-spacing: 1px;
         flex-shrink: 0;
       }
       .author-name {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: 22px;
+        font-weight: 600;
         color: var(--black);
         letter-spacing: 1px;
         line-height: 1;
+        text-transform: uppercase;
       }
       .author-role {
         font-size: 10px;
@@ -329,10 +344,12 @@
         margin-bottom: 10px;
       }
       .section-title {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: clamp(34px, 7vw, 52px);
         color: var(--black);
         letter-spacing: 1px;
+        text-transform: uppercase;
         margin-bottom: 32px;
         line-height: 1;
       }
@@ -450,10 +467,12 @@
         width: fit-content;
       }
       .price-name {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: 26px;
         color: var(--black);
         letter-spacing: 1px;
+        text-transform: uppercase;
         margin-bottom: 6px;
       }
       .price-card.featured .price-name {
@@ -467,7 +486,8 @@
         line-height: 1;
       }
       .price-amount {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: clamp(36px, 6vw, 52px);
         color: var(--black);
         letter-spacing: -1px;
@@ -476,7 +496,7 @@
         color: var(--lime);
       }
       .price-currency {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: clamp(16px, 3vw, 22px);
         color: #aaa;
         letter-spacing: 1px;
@@ -485,9 +505,11 @@
         color: rgba(200, 245, 90, 0.5);
       }
       .price-amount-text {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: clamp(26px, 5vw, 40px);
         color: var(--black);
+        text-transform: uppercase;
       }
       .price-card.featured .price-amount-text {
         color: var(--lime);
@@ -698,11 +720,13 @@
         flex-wrap: wrap;
       }
       .cta-big {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
         font-size: clamp(30px, 7vw, 44px);
         color: var(--lime);
         letter-spacing: 1px;
         line-height: 1;
+        text-transform: uppercase;
       }
       .cta-small {
         font-size: 13px;
@@ -734,13 +758,13 @@
         letter-spacing: 0.5px;
       }
       .footer-year {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Oswald", sans-serif;
         font-size: 14px;
         color: rgba(245, 240, 232, 0.2);
         letter-spacing: 2px;
       }
 
-      /* ── MOBILE RESPONSIVE ── */
+      /* MOBILE */
       @media (max-width: 768px) {
         .nav-links {
           display: none;
@@ -748,8 +772,6 @@
         .hamburger {
           display: flex;
         }
-
-        /* Hero buttons stacked */
         .hero-buttons {
           flex-direction: column;
         }
@@ -757,8 +779,6 @@
         .hero-buttons .btn-outline {
           width: 100%;
         }
-
-        /* Services: single column */
         .services-grid {
           grid-template-columns: 1fr;
         }
@@ -771,16 +791,12 @@
         .srv-card:last-child {
           border-bottom: none !important;
         }
-
-        /* Pricing: single column, featured first */
         .pricing-grid {
           grid-template-columns: 1fr;
         }
         .price-card.featured {
           order: -1;
         }
-
-        /* Perks: row layout on mobile */
         .perks-grid {
           grid-template-columns: 1fr;
         }
@@ -793,8 +809,6 @@
         .perk-icon {
           margin: 0;
         }
-
-        /* CTA: stacked */
         .cta-box {
           flex-direction: column;
           align-items: flex-start;
