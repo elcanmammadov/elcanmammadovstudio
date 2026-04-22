@@ -27,12 +27,16 @@
       }
       html {
         scroll-behavior: smooth;
+        /* Horizontal scroll-u kəsir */
+        overflow-x: hidden;
       }
       body {
         font-family: "Barlow", "Arial", "Helvetica", sans-serif;
         background: var(--gray-bg);
         color: var(--black);
+        /* Horizontal scroll-u kəsir */
         overflow-x: hidden;
+        max-width: 100vw;
       }
 
       /* NAV */
@@ -156,6 +160,7 @@
         min-height: 100vh;
         padding: 120px 24px 80px;
         position: relative;
+        /* overflow:hidden — arxa rəqəm kənara çıxmasın */
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -169,11 +174,15 @@
         color: transparent;
         -webkit-text-stroke: 1px rgba(245, 240, 232, 0.05);
         position: absolute;
-        right: -10px;
+        /* right:-10px əvəzinə right:0 və max-width ilə kəsirik */
+        right: 0;
         bottom: -20px;
         letter-spacing: -10px;
         user-select: none;
         pointer-events: none;
+        /* Rəqəm kənara çıxmasın */
+        max-width: 100%;
+        overflow: hidden;
       }
       .hero-badge {
         display: inline-block;
@@ -325,9 +334,12 @@
         display: block;
         width: 100%;
         background: var(--lime);
+        /* Wave overflow-unu kəs */
+        overflow: hidden;
       }
       .wave svg {
         display: block;
+        width: 100%;
       }
 
       /* SECTIONS */
@@ -361,6 +373,8 @@
         border: 1.5px solid var(--black);
         border-radius: 6px;
         overflow: hidden;
+        /* Grid kənara çıxmasın */
+        width: 100%;
       }
       .srv-card {
         padding: 20px 18px;
@@ -371,6 +385,8 @@
         align-items: flex-start;
         background: var(--cream);
         transition: background 0.2s;
+        /* Kart kənara çıxmasın */
+        min-width: 0;
       }
       .srv-card:hover {
         background: #ece7df;
@@ -422,6 +438,8 @@
       .pricing-section {
         background: var(--cream);
         padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+        /* Overflow kəs */
+        overflow: hidden;
       }
       .pricing-inner {
         max-width: 960px;
@@ -431,6 +449,8 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+        /* Grid kənara çıxmasın */
+        width: 100%;
       }
 
       .price-card {
@@ -443,6 +463,8 @@
         transition:
           transform 0.2s,
           border-color 0.2s;
+        /* Kart kənara çıxmasın */
+        min-width: 0;
       }
       .price-card:hover {
         transform: translateY(-4px);
@@ -621,6 +643,7 @@
       .perks-section {
         background: var(--black);
         padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
+        overflow: hidden;
       }
       .perks-inner {
         max-width: 960px;
@@ -636,6 +659,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
+        width: 100%;
       }
       .perk-card {
         border: 1px solid rgba(245, 240, 232, 0.08);
@@ -648,6 +672,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-width: 0;
       }
       .perk-card:hover {
         border-color: rgba(200, 245, 90, 0.3);
@@ -718,6 +743,8 @@
         justify-content: space-between;
         gap: 24px;
         flex-wrap: wrap;
+        /* Kənar çıxmasın */
+        overflow: hidden;
       }
       .cta-big {
         font-family: "Oswald", sans-serif;
@@ -746,6 +773,7 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;
+        overflow: hidden;
       }
       .footer-tags {
         display: flex;
@@ -778,7 +806,10 @@
         .hero-buttons .btn-primary,
         .hero-buttons .btn-outline {
           width: 100%;
+          text-align: center;
         }
+
+        /* Services — 1 sütun */
         .services-grid {
           grid-template-columns: 1fr;
         }
@@ -791,12 +822,17 @@
         .srv-card:last-child {
           border-bottom: none !important;
         }
+
+        /* Pricing — 1 sütun */
         .pricing-grid {
           grid-template-columns: 1fr;
+          gap: 12px;
         }
         .price-card.featured {
           order: -1;
         }
+
+        /* Perks — 1 sütun */
         .perks-grid {
           grid-template-columns: 1fr;
         }
@@ -809,12 +845,14 @@
         .perk-icon {
           margin: 0;
         }
+
         .cta-box {
           flex-direction: column;
           align-items: flex-start;
         }
         .cta-box .btn-primary {
           width: 100%;
+          text-align: center;
         }
       }
 
@@ -824,6 +862,10 @@
         }
         .footer-tags {
           gap: 6px;
+        }
+        /* Çox kiçik ekranlarda hero rəqəmi tamamilə gizlə */
+        .hero-bg-num {
+          display: none;
         }
       }
     </style>
@@ -1017,8 +1059,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >5 səhifəlik veb sayt
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
+                ></span>
+                5 səhifəlik veb sayt
               </li>
               <li>
                 <span class="check"
@@ -1030,8 +1073,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Mobil uyğunluq
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
+                ></span>
+                Mobil uyğunluq
               </li>
               <li>
                 <span class="check"
@@ -1043,8 +1087,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Korporativ e-poçt
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
+                ></span>
+                Korporativ e-poçt
               </li>
               <li>
                 <span class="check"
@@ -1056,8 +1101,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Domen + Hosting (1 il)
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
+                ></span>
+                Domen + Hosting (1 il)
               </li>
               <li>
                 <span class="check"
@@ -1069,8 +1115,9 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >3 ay texniki dəstək
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
+                ></span>
+                3 ay texniki dəstək
               </li>
             </ul>
             <a
