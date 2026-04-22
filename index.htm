@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elcan Məmmədov - Texnologiya Həlləri 2026</title>
+    <title>Elcan Məmmədov — Rəqəmsal Həllər</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
     <style>
       *,
       *::before,
@@ -18,1172 +19,1581 @@
         margin: 0;
         padding: 0;
       }
+
       :root {
-        --black: #1a1a1a;
-        --cream: #f5f0e8;
-        --lime: #c8f55a;
-        --gray-bg: #e8e4dc;
-        --muted: rgba(245, 240, 232, 0.45);
-      }
-      html {
-        scroll-behavior: smooth;
-        /* Horizontal scroll-u kəsir */
-        overflow-x: hidden;
-      }
-      body {
-        font-family: "Barlow", "Arial", "Helvetica", sans-serif;
-        background: var(--gray-bg);
-        color: var(--black);
-        /* Horizontal scroll-u kəsir */
-        overflow-x: hidden;
-        max-width: 100vw;
+        --ink: #0d0d0d;
+        --paper: #f2ede4;
+        --warm: #ede8df;
+        --acid: #d4f73c;
+        --acid2: #b8e020;
+        --smoke: #6b6560;
+        --rule: rgba(13, 13, 13, 0.1);
       }
 
-      /* NAV */
+      html {
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Barlow", sans-serif;
+        font-weight: 500;
+        background: var(--paper);
+        color: var(--ink);
+        overflow-x: hidden;
+      }
+
+      /* ─── NOISE OVERLAY ─── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.5;
+      }
+
+      /* ─── NAV ─── */
       nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 200;
-        background: var(--black);
+        z-index: 500;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 0 24px;
-        height: 56px;
+        justify-content: space-between;
+        padding: 0 32px;
+        height: 60px;
+        background: rgba(242, 237, 228, 0.88);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--rule);
       }
       .nav-logo {
-        font-family: "Oswald", sans-serif;
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--lime);
-        letter-spacing: 2px;
-        text-transform: uppercase;
+        font-family: "Anton", sans-serif;
+        font-size: 22px;
+        letter-spacing: 3px;
+        color: var(--ink);
+      }
+      .nav-logo span {
+        color: var(--acid2);
       }
       .nav-links {
         display: flex;
-        gap: 28px;
+        gap: 36px;
         list-style: none;
       }
       .nav-links a {
-        color: rgba(245, 240, 232, 0.55);
-        text-decoration: none;
         font-size: 11px;
+        font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
-        font-weight: 400;
+        color: var(--smoke);
+        text-decoration: none;
         transition: color 0.2s;
       }
       .nav-links a:hover {
-        color: var(--lime);
+        color: var(--ink);
       }
-      .nav-cta {
-        background: var(--lime) !important;
-        color: var(--black) !important;
-        padding: 7px 18px;
+      .nav-pill {
+        background: var(--ink) !important;
+        color: var(--acid) !important;
+        padding: 8px 20px;
         border-radius: 100px;
         font-weight: 600 !important;
+        letter-spacing: 1px !important;
+      }
+      .nav-pill:hover {
+        opacity: 0.85;
       }
 
-      .hamburger {
+      /* hamburger */
+      .hbg {
         display: none;
         flex-direction: column;
         gap: 5px;
-        cursor: pointer;
-        padding: 4px;
         background: none;
         border: none;
+        cursor: pointer;
+        padding: 4px;
       }
-      .hamburger span {
+      .hbg span {
         display: block;
-        width: 22px;
+        width: 24px;
         height: 2px;
-        background: var(--cream);
+        background: var(--ink);
         border-radius: 2px;
         transition:
           transform 0.3s,
           opacity 0.3s;
       }
-      .hamburger.open span:nth-child(1) {
+      .hbg.open span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
-      .hamburger.open span:nth-child(2) {
+      .hbg.open span:nth-child(2) {
         opacity: 0;
       }
-      .hamburger.open span:nth-child(3) {
+      .hbg.open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
 
-      .mobile-menu {
+      .mob-menu {
         display: none;
         position: fixed;
-        inset: 56px 0 0 0;
-        background: var(--black);
-        z-index: 199;
+        inset: 60px 0 0 0;
+        background: var(--ink);
+        z-index: 499;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 32px;
+        gap: 28px;
       }
-      .mobile-menu.open {
+      .mob-menu.open {
         display: flex;
       }
-      .mobile-menu a {
-        color: var(--cream);
+      .mob-menu a {
+        font-family: "Anton", sans-serif;
+        font-size: 52px;
+        letter-spacing: 4px;
+        color: var(--paper);
         text-decoration: none;
-        font-family: "Oswald", sans-serif;
-        font-size: 38px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
         transition: color 0.2s;
       }
-      .mobile-menu a:hover {
-        color: var(--lime);
+      .mob-menu a:hover {
+        color: var(--acid);
       }
-      .mobile-menu .m-cta {
-        background: var(--lime);
-        color: var(--black) !important;
-        padding: 12px 40px;
-        border-radius: 100px;
-        font-family: "Barlow", sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+      .mob-cta {
+        font-family: "Barlow", sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        background: var(--acid) !important;
+        color: var(--ink) !important;
+        padding: 14px 44px !important;
+        border-radius: 100px !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
       }
 
-      /* HERO */
+      /* ─── HERO ─── */
       .hero {
-        background: var(--black);
+        background: var(--ink);
         min-height: 100vh;
-        padding: 120px 24px 80px;
+        padding: 100px 32px 80px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 60px;
         position: relative;
-        /* overflow:hidden — arxa rəqəm kənara çıxmasın */
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
       }
-      .hero-bg-num {
-        font-family: "Oswald", sans-serif;
-        font-size: clamp(150px, 38vw, 380px);
-        font-weight: 700;
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(245, 240, 232, 0.05);
+
+      /* grid lines decoration */
+      .hero::after {
+        content: "";
         position: absolute;
-        /* right:-10px əvəzinə right:0 və max-width ilə kəsirik */
-        right: 0;
-        bottom: -20px;
-        letter-spacing: -10px;
-        user-select: none;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(242, 237, 228, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(242, 237, 228, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
         pointer-events: none;
-        /* Rəqəm kənara çıxmasın */
-        max-width: 100%;
-        overflow: hidden;
       }
-      .hero-badge {
-        display: inline-block;
-        border: 1px solid rgba(245, 240, 232, 0.2);
-        color: rgba(245, 240, 232, 0.45);
-        font-size: 10px;
+
+      .hero-left {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(212, 247, 60, 0.08);
+        border: 1px solid rgba(212, 247, 60, 0.18);
+        padding: 7px 16px;
+        border-radius: 100px;
+        margin-bottom: 28px;
+      }
+      .eyebrow-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--acid);
+        animation: blink 2s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .eyebrow-text {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--acid);
+      }
+
+      .hero-h1 {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(72px, 11vw, 128px);
+        line-height: 0.9;
         letter-spacing: 3px;
+        color: var(--paper);
         text-transform: uppercase;
-        padding: 7px 14px;
-        border-radius: 2px;
-        margin-bottom: 24px;
-        width: fit-content;
       }
-      .hero-title {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: clamp(52px, 13vw, 110px);
-        line-height: 1.2;
-        color: var(--cream);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        position: relative;
-        z-index: 2;
+      .hero-h1 .acid {
+        color: var(--acid);
       }
-      .hero-title .lime {
-        color: var(--lime);
+      .hero-h1 .italic-serif {
+        font-family: "Barlow Condensed", sans-serif;
+        font-style: italic;
+        font-weight: 900;
+        font-size: 1em;
+        color: var(--acid);
+        letter-spacing: 2px;
+        display: block;
       }
+
       .hero-sub {
-        font-size: clamp(13px, 3.5vw, 15px);
-        color: var(--muted);
-        font-weight: 300;
-        margin: 40px 0 36px;
+        margin: 28px 0 40px;
+        font-size: 16px;
+        font-weight: 500;
         line-height: 1.7;
-        max-width: 440px;
-        position: relative;
-        z-index: 2;
+        color: rgba(242, 237, 228, 0.6);
+        max-width: 420px;
+        letter-spacing: 0.2px;
       }
-      .hero-buttons {
+      .hero-sub strong {
+        color: rgba(242, 237, 228, 0.95);
+        font-weight: 700;
+      }
+
+      .hero-btns {
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
-        position: relative;
-        z-index: 2;
       }
 
-      .btn-primary {
-        background: var(--lime);
-        color: var(--black);
-        font-family: "Barlow", sans-serif;
+      .btn-acid {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--acid);
+        color: var(--ink);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
-        padding: 14px 28px;
+        padding: 16px 32px;
         border-radius: 100px;
+        text-decoration: none;
         border: none;
         cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
         transition:
           transform 0.2s,
           box-shadow 0.2s;
         white-space: nowrap;
-        text-align: center;
       }
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(200, 245, 90, 0.3);
+      .btn-acid:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(212, 247, 60, 0.35);
       }
-      .btn-outline {
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         background: transparent;
-        color: rgba(245, 240, 232, 0.6);
-        font-family: "Barlow", sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 1.5px;
+        color: rgba(242, 237, 228, 0.55);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        padding: 14px 28px;
+        padding: 16px 28px;
         border-radius: 100px;
-        border: 1px solid rgba(245, 240, 232, 0.2);
-        cursor: pointer;
+        border: 1px solid rgba(242, 237, 228, 0.15);
         text-decoration: none;
-        display: inline-block;
+        cursor: pointer;
         transition:
           border-color 0.2s,
           color 0.2s;
         white-space: nowrap;
-        text-align: center;
       }
-      .btn-outline:hover {
-        border-color: var(--lime);
-        color: var(--lime);
+      .btn-ghost:hover {
+        border-color: var(--acid);
+        color: var(--acid);
       }
 
-      /* AUTHOR */
-      .author-strip {
-        background: var(--lime);
+      /* hero stats */
+      .hero-right {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-stats-card {
+        background: rgba(242, 237, 228, 0.04);
+        border: 1px solid rgba(242, 237, 228, 0.08);
+        border-radius: 16px;
+        padding: 40px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .stat-item {
+        border-bottom: 1px solid rgba(242, 237, 228, 0.06);
+        padding-bottom: 28px;
+      }
+      .stat-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .stat-num {
+        font-family: "Anton", sans-serif;
+        font-size: 64px;
+        line-height: 1;
+        letter-spacing: 2px;
+        color: var(--acid);
+      }
+      .stat-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: rgba(242, 237, 228, 0.5);
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+      .stat-desc {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(242, 237, 228, 0.6);
+        margin-top: 6px;
+        line-height: 1.6;
+      }
+
+      /* ─── MARQUEE STRIP ─── */
+      .marquee-wrap {
+        background: var(--acid);
+        overflow: hidden;
+        padding: 14px 0;
+        border-top: 2px solid var(--ink);
+        border-bottom: 2px solid var(--ink);
+      }
+      .marquee-track {
+        display: flex;
+        gap: 0;
+        white-space: nowrap;
+        animation: marquee 22s linear infinite;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee-item {
+        font-family: "Anton", sans-serif;
+        font-size: 18px;
+        letter-spacing: 3px;
+        color: var(--ink);
+        padding: 0 40px;
+        flex-shrink: 0;
+      }
+      .marquee-dot {
+        color: rgba(13, 13, 13, 0.3);
+        margin-right: -20px;
+      }
+
+      /* ─── IDENTITY STRIP ─── */
+      .identity {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 24px;
+        padding: 20px 40px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--rule);
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 14px;
       }
-      .author-left {
+      .id-left {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 16px;
       }
-      .avatar {
-        width: 44px;
-        height: 44px;
+      .id-avatar {
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
-        background: var(--black);
+        background: var(--ink);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Oswald", sans-serif;
-        font-size: 17px;
-        font-weight: 600;
-        color: var(--lime);
-        letter-spacing: 1px;
+        font-family: "Anton", sans-serif;
+        font-size: 18px;
+        letter-spacing: 2px;
+        color: var(--acid);
         flex-shrink: 0;
       }
-      .author-name {
-        font-family: "Oswald", sans-serif;
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--black);
-        letter-spacing: 1px;
-        line-height: 1;
-        text-transform: uppercase;
-      }
-      .author-role {
-        font-size: 10px;
-        color: rgba(26, 26, 26, 0.55);
-        font-weight: 300;
-        letter-spacing: 1px;
-        margin-top: 3px;
-      }
-      .author-right {
-        font-size: 10px;
-        color: rgba(26, 26, 26, 0.45);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-      }
-
-      .wave {
-        display: block;
-        width: 100%;
-        background: var(--lime);
-        /* Wave overflow-unu kəs */
-        overflow: hidden;
-      }
-      .wave svg {
-        display: block;
-        width: 100%;
-      }
-
-      /* SECTIONS */
-      .section {
-        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
-        max-width: 960px;
-        margin: 0 auto;
-      }
-      .section-label {
-        font-size: 9px;
+      .id-name {
+        font-family: "Anton", sans-serif;
+        font-size: 28px;
         letter-spacing: 3px;
-        text-transform: uppercase;
-        color: #999;
-        margin-bottom: 10px;
-      }
-      .section-title {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: clamp(34px, 7vw, 52px);
-        color: var(--black);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 32px;
-        line-height: 1;
-      }
-
-      /* SERVICES */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        border: 1.5px solid var(--black);
-        border-radius: 6px;
-        overflow: hidden;
-        /* Grid kənara çıxmasın */
-        width: 100%;
-      }
-      .srv-card {
-        padding: 20px 18px;
-        border-right: 1px solid var(--black);
-        border-bottom: 1px solid var(--black);
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        background: var(--cream);
-        transition: background 0.2s;
-        /* Kart kənara çıxmasın */
-        min-width: 0;
-      }
-      .srv-card:hover {
-        background: #ece7df;
-      }
-      .srv-card:nth-child(even) {
-        border-right: none;
-      }
-      .srv-card:nth-last-child(-n + 2) {
-        border-bottom: none;
-      }
-      .srv-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        background: rgba(200, 245, 90, 0.12);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-      .srv-icon svg {
-        width: 18px;
-        height: 18px;
-        stroke: #7aaa20;
-        stroke-width: 1.6;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .srv-card:hover .srv-icon {
-        background: rgba(200, 245, 90, 0.22);
-      }
-      .srv-name {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--black);
-        line-height: 1.3;
-      }
-      .srv-desc {
-        font-size: 11px;
-        font-weight: 300;
-        color: #888;
-        margin-top: 4px;
-        line-height: 1.5;
-      }
-
-      /* PRICING */
-      .pricing-section {
-        background: var(--cream);
-        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
-        /* Overflow kəs */
-        overflow: hidden;
-      }
-      .pricing-inner {
-        max-width: 960px;
-        margin: 0 auto;
-      }
-      .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        /* Grid kənara çıxmasın */
-        width: 100%;
-      }
-
-      .price-card {
-        background: #f5f0e8;
-        border: 1.5px solid #d8d3cb;
-        border-radius: 10px;
-        padding: 28px 20px;
-        display: flex;
-        flex-direction: column;
-        transition:
-          transform 0.2s,
-          border-color 0.2s;
-        /* Kart kənara çıxmasın */
-        min-width: 0;
-      }
-      .price-card:hover {
-        transform: translateY(-4px);
-        border-color: #a8a39b;
-      }
-      .price-card.featured {
-        background: var(--black);
-        border-color: var(--lime);
-      }
-
-      .price-badge {
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--black);
-        background: var(--lime);
-        padding: 4px 12px;
-        border-radius: 100px;
-        display: inline-block;
-        margin-bottom: 14px;
-        width: fit-content;
-      }
-      .price-name {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: 26px;
-        color: var(--black);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-      }
-      .price-card.featured .price-name {
-        color: var(--cream);
-      }
-
-      .price-row {
-        display: flex;
-        align-items: baseline;
-        gap: 5px;
-        line-height: 1;
-      }
-      .price-amount {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: clamp(36px, 6vw, 52px);
-        color: var(--black);
-        letter-spacing: -1px;
-      }
-      .price-card.featured .price-amount {
-        color: var(--lime);
-      }
-      .price-currency {
-        font-family: "Oswald", sans-serif;
-        font-size: clamp(16px, 3vw, 22px);
-        color: #aaa;
-        letter-spacing: 1px;
-      }
-      .price-card.featured .price-currency {
-        color: rgba(200, 245, 90, 0.5);
-      }
-      .price-amount-text {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: clamp(26px, 5vw, 40px);
-        color: var(--black);
+        color: var(--ink);
         text-transform: uppercase;
       }
-      .price-card.featured .price-amount-text {
-        color: var(--lime);
-      }
-
-      .price-period {
-        font-size: 10px;
-        color: #999;
-        font-weight: 300;
-        margin-bottom: 20px;
-        margin-top: 4px;
-      }
-      .price-card.featured .price-period {
-        color: rgba(245, 240, 232, 0.4);
-      }
-      .price-divider {
-        height: 1px;
-        background: #d8d3cb;
-        margin-bottom: 18px;
-      }
-      .price-card.featured .price-divider {
-        background: rgba(245, 240, 232, 0.1);
-      }
-      .price-features {
-        list-style: none;
-        flex: 1;
-      }
-      .price-features li {
+      .id-role {
         font-size: 11px;
         font-weight: 400;
-        color: #555;
-        padding: 6px 0;
-        border-bottom: 1px solid #ede9e1;
+        letter-spacing: 1.5px;
+        color: var(--smoke);
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+      .id-right {
         display: flex;
         align-items: center;
         gap: 8px;
       }
-      .price-card.featured .price-features li {
-        color: rgba(245, 240, 232, 0.65);
-        border-bottom-color: rgba(245, 240, 232, 0.07);
-      }
-      .price-features li:last-child {
-        border-bottom: none;
-      }
-      .check {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: var(--lime);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        color: var(--black);
-      }
-      .check svg {
-        width: 8px;
-        height: 8px;
-        display: block;
-      }
-      .price-card.featured .check {
-        background: rgba(200, 245, 90, 0.15);
-      }
-      .price-card.featured .check svg {
-        stroke: var(--lime);
-      }
-      .price-btn {
-        margin-top: 24px;
-        display: block;
-        text-align: center;
-        padding: 12px;
+      .id-tag {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: var(--smoke);
+        border: 1px solid var(--rule);
+        padding: 5px 12px;
         border-radius: 100px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        text-decoration: none;
-        border: 1.5px solid var(--black);
-        color: var(--black);
-        background: transparent;
-        cursor: pointer;
-        transition:
-          background 0.2s,
-          color 0.2s;
-      }
-      .price-btn:hover {
-        background: var(--black);
-        color: var(--cream);
-      }
-      .price-card.featured .price-btn {
-        background: var(--lime);
-        color: var(--black);
-        border-color: var(--lime);
-      }
-      .price-card.featured .price-btn:hover {
-        background: #b8e04a;
-        border-color: #b8e04a;
-      }
-      .price-note {
-        font-size: 11px;
-        color: #999;
-        font-weight: 300;
-        text-align: center;
-        margin-top: 20px;
-        line-height: 1.6;
       }
 
-      /* PERKS */
-      .perks-section {
-        background: var(--black);
-        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
-        overflow: hidden;
-      }
-      .perks-inner {
-        max-width: 960px;
+      /* ─── SECTION COMMON ─── */
+      .s-wrap {
+        max-width: 1100px;
         margin: 0 auto;
+        padding: clamp(60px, 9vw, 100px) 32px;
       }
-      .perks-section .section-label {
-        color: rgba(245, 240, 232, 0.35);
+      .s-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--smoke);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
-      .perks-section .section-title {
-        color: var(--cream);
+      .s-label::before {
+        content: "";
+        display: block;
+        width: 28px;
+        height: 1px;
+        background: currentColor;
       }
-      .perks-grid {
+      .s-title {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(52px, 8vw, 84px);
+        letter-spacing: 3px;
+        color: var(--ink);
+        line-height: 0.92;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .s-sub {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--smoke);
+        line-height: 1.65;
+        max-width: 560px;
+        margin-bottom: 48px;
+        letter-spacing: 0.2px;
+      }
+
+      /* ─── SERVICES ─── */
+      .services-bg {
+        background: var(--warm);
+      }
+      .srv-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        width: 100%;
+        gap: 2px;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        overflow: hidden;
       }
-      .perk-card {
-        border: 1px solid rgba(245, 240, 232, 0.08);
-        border-radius: 8px;
-        padding: 28px 16px;
-        text-align: center;
-        transition:
-          border-color 0.2s,
-          transform 0.2s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      .srv-card {
+        background: var(--paper);
+        padding: 32px 28px;
+        border-right: 2px solid var(--ink);
+        border-bottom: 2px solid var(--ink);
+        transition: background 0.25s;
+        cursor: default;
+        position: relative;
+        overflow: hidden;
         min-width: 0;
       }
-      .perk-card:hover {
-        border-color: rgba(200, 245, 90, 0.3);
-        transform: translateY(-3px);
+      .srv-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--acid);
+        transform: translateY(101%);
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 0;
       }
-      .perk-card.lime-card {
-        background: var(--lime);
-        border-color: var(--lime);
+      .srv-card:hover::before {
+        transform: translateY(0);
       }
-      .perk-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 13px;
+      .srv-card:nth-child(3n) {
+        border-right: none;
+      }
+      .srv-card:nth-last-child(-n + 3) {
+        border-bottom: none;
+      }
+      .srv-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .srv-num {
+        font-family: "Anton", sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: var(--smoke);
+        margin-bottom: 20px;
+        transition: color 0.25s;
+      }
+      .srv-card:hover .srv-num {
+        color: rgba(13, 13, 13, 0.4);
+      }
+
+      .srv-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(13, 13, 13, 0.06);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 16px;
-        background: rgba(245, 240, 232, 0.07);
-        flex-shrink: 0;
+        margin-bottom: 18px;
+        transition: background 0.25s;
       }
-      .perk-card.lime-card .perk-icon {
-        background: rgba(26, 26, 26, 0.12);
+      .srv-card:hover .srv-icon-wrap {
+        background: rgba(13, 13, 13, 0.1);
       }
-      .perk-icon svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--cream);
+      .srv-icon-wrap svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--ink);
         stroke-width: 1.5;
         fill: none;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
-      .perk-card.lime-card .perk-icon svg {
-        stroke: var(--black);
+
+      .srv-name {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 900;
+        font-size: 24px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--ink);
+        line-height: 1.05;
+        margin-bottom: 10px;
       }
-      .perk-title {
+      .srv-desc {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--smoke);
+        line-height: 1.65;
+        transition: color 0.25s;
+      }
+      .srv-card:hover .srv-desc {
+        color: rgba(13, 13, 13, 0.6);
+      }
+
+      .srv-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--smoke);
+        margin-top: 20px;
+        transition:
+          color 0.2s,
+          gap 0.2s;
+      }
+      .srv-card:hover .srv-arrow {
+        color: var(--ink);
+        gap: 10px;
+      }
+
+      /* ─── PRICING ─── */
+      .pricing-bg {
+        background: var(--ink);
+      }
+      .pricing-bg .s-label {
+        color: rgba(242, 237, 228, 0.3);
+      }
+      .pricing-bg .s-title {
+        color: var(--paper);
+      }
+      .pricing-bg .s-sub {
+        color: rgba(242, 237, 228, 0.4);
+      }
+
+      .price-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .p-card {
+        border: 1px solid rgba(242, 237, 228, 0.08);
+        border-radius: 14px;
+        padding: 36px 28px;
+        display: flex;
+        flex-direction: column;
+        transition:
+          border-color 0.25s,
+          transform 0.25s;
+        min-width: 0;
+      }
+      .p-card:hover {
+        border-color: rgba(242, 237, 228, 0.18);
+        transform: translateY(-5px);
+      }
+      .p-card.hot {
+        background: var(--acid);
+        border-color: var(--acid);
+      }
+      .p-card.hot:hover {
+        transform: translateY(-5px);
+      }
+
+      .p-tag {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--ink);
+        background: var(--acid);
+        padding: 5px 14px;
+        border-radius: 100px;
+        display: inline-block;
+        margin-bottom: 20px;
+        width: fit-content;
+      }
+      .p-card.hot .p-tag {
+        background: var(--ink);
+        color: var(--acid);
+      }
+
+      .p-name {
+        font-family: "Anton", sans-serif;
+        font-size: 32px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(242, 237, 228, 0.7);
+        margin-bottom: 12px;
+      }
+      .p-card.hot .p-name {
+        color: var(--ink);
+      }
+
+      .p-price {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(52px, 7vw, 72px);
+        line-height: 1;
+        letter-spacing: -1px;
+        color: var(--paper);
+      }
+      .p-card.hot .p-price {
+        color: var(--ink);
+      }
+      .p-currency {
+        font-family: "Barlow", sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        color: rgba(242, 237, 228, 0.4);
+        vertical-align: super;
+        font-style: italic;
+      }
+      .p-card.hot .p-currency {
+        color: rgba(13, 13, 13, 0.4);
+      }
+      .p-custom {
+        font-family: "Barlow Condensed", sans-serif;
+        font-style: italic;
+        font-size: 42px;
+        color: var(--paper);
+        line-height: 1;
+      }
+
+      .p-period {
+        font-size: 11px;
+        color: rgba(242, 237, 228, 0.3);
+        margin-top: 6px;
+        margin-bottom: 24px;
+      }
+      .p-card.hot .p-period {
+        color: rgba(13, 13, 13, 0.4);
+      }
+
+      .p-divider {
+        height: 1px;
+        background: rgba(242, 237, 228, 0.07);
+        margin-bottom: 22px;
+      }
+      .p-card.hot .p-divider {
+        background: rgba(13, 13, 13, 0.12);
+      }
+
+      .p-list {
+        list-style: none;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .p-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
         font-size: 13px;
         font-weight: 600;
-        color: var(--cream);
-        line-height: 1.35;
-      }
-      .perk-card.lime-card .perk-title {
-        color: var(--black);
-      }
-      .perk-sub {
-        font-size: 11px;
-        color: rgba(245, 240, 232, 0.4);
-        margin-top: 6px;
-        font-weight: 300;
+        color: rgba(242, 237, 228, 0.75);
         line-height: 1.5;
       }
-      .perk-card.lime-card .perk-sub {
-        color: rgba(26, 26, 26, 0.55);
+      .p-card.hot .p-list li {
+        color: rgba(13, 13, 13, 0.7);
+      }
+      .p-check {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: rgba(212, 247, 60, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+      }
+      .p-card.hot .p-check {
+        background: rgba(13, 13, 13, 0.1);
+      }
+      .p-check svg {
+        width: 9px;
+        height: 9px;
+        stroke: var(--acid);
+        stroke-width: 2.5;
+        fill: none;
+      }
+      .p-card.hot .p-check svg {
+        stroke: var(--ink);
       }
 
-      /* CTA */
-      .cta-section {
-        padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
-        max-width: 960px;
-        margin: 0 auto;
+      .p-btn {
+        display: block;
+        text-align: center;
+        margin-top: 28px;
+        padding: 14px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid rgba(242, 237, 228, 0.15);
+        color: rgba(242, 237, 228, 0.6);
+        background: transparent;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
       }
-      .cta-box {
-        background: var(--black);
-        border-radius: 10px;
-        padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 40px);
+      .p-btn:hover {
+        background: rgba(242, 237, 228, 0.06);
+        color: var(--paper);
+      }
+      .p-card.hot .p-btn {
+        background: var(--ink);
+        color: var(--acid);
+        border-color: var(--ink);
+      }
+      .p-card.hot .p-btn:hover {
+        background: #1e1e1e;
+      }
+
+      .p-note {
+        text-align: center;
+        margin-top: 28px;
+        font-size: 12px;
+        font-weight: 300;
+        color: rgba(242, 237, 228, 0.25);
+        line-height: 1.7;
+      }
+
+      /* ─── WHY ─── */
+      .why-bg {
+        background: var(--paper);
+      }
+      .why-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .why-left {
+      }
+      .why-right {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .why-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .why-item:last-child {
+        border-bottom: none;
+      }
+      .why-num {
+        font-family: "Anton", sans-serif;
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: var(--smoke);
+        flex-shrink: 0;
+        padding-top: 4px;
+      }
+      .why-text {
+      }
+      .why-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 900;
+        font-size: 24px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+      .why-desc {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--smoke);
+        line-height: 1.65;
+      }
+
+      /* big feature block */
+      .why-big-card {
+        background: var(--ink);
+        border-radius: 16px;
+        padding: 44px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .wbc-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(242, 237, 228, 0.3);
+      }
+      .wbc-title {
+        font-family: "Anton", sans-serif;
+        font-size: 64px;
+        letter-spacing: 3px;
+        color: var(--acid);
+        line-height: 0.92;
+      }
+      .wbc-body {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(242, 237, 228, 0.7);
+        line-height: 1.75;
+      }
+      .wbc-body strong {
+        color: rgba(242, 237, 228, 0.97);
+        font-weight: 800;
+      }
+      .wbc-perks {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .wbc-perk {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .wbc-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(212, 247, 60, 0.08);
+        border: 1px solid rgba(212, 247, 60, 0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .wbc-icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--acid);
+        stroke-width: 1.6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .wbc-perk-text {
+        font-size: 13px;
+        font-weight: 400;
+        color: rgba(242, 237, 228, 0.65);
+      }
+      .wbc-perk-text strong {
+        color: var(--acid);
+        font-weight: 600;
+      }
+
+      /* ─── CTA ─── */
+      .cta-bg {
+        background: var(--acid);
+      }
+      .cta-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 24px;
+        gap: 40px;
         flex-wrap: wrap;
-        /* Kənar çıxmasın */
-        overflow: hidden;
       }
-      .cta-big {
-        font-family: "Oswald", sans-serif;
-        font-weight: 700;
-        font-size: clamp(30px, 7vw, 44px);
-        color: var(--lime);
-        letter-spacing: 1px;
-        line-height: 1;
+      .cta-heading {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(48px, 8vw, 88px);
+        letter-spacing: 2px;
+        color: var(--ink);
+        line-height: 0.92;
         text-transform: uppercase;
       }
-      .cta-small {
-        font-size: 13px;
-        color: rgba(245, 240, 232, 0.4);
-        font-weight: 300;
-        margin-top: 8px;
-        line-height: 1.5;
+      .cta-heading em {
+        font-family: "Barlow Condensed", sans-serif;
+        font-style: italic;
+        font-size: 0.88em;
+        display: block;
+      }
+      .cta-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        max-width: 320px;
+      }
+      .cta-body {
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(13, 13, 13, 0.7);
+        line-height: 1.7;
+      }
+      .btn-ink {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--ink);
+        color: var(--acid);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 16px 36px;
+        border-radius: 100px;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        white-space: nowrap;
+      }
+      .btn-ink:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(13, 13, 13, 0.2);
       }
 
-      /* FOOTER */
+      /* ─── FOOTER ─── */
       footer {
-        background: var(--black);
-        border-top: 1px solid rgba(245, 240, 232, 0.06);
-        padding: 20px 24px;
+        background: var(--ink);
+        padding: 24px 40px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         flex-wrap: wrap;
-        gap: 10px;
-        overflow: hidden;
+        gap: 14px;
       }
-      .footer-tags {
+      .ft-logo {
+        font-family: "Anton", sans-serif;
+        font-size: 18px;
+        letter-spacing: 3px;
+        color: rgba(242, 237, 228, 0.25);
+      }
+      .ft-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
       }
-      .ftag {
+      .ft-tag {
         font-size: 10px;
-        color: rgba(245, 240, 232, 0.25);
+        color: rgba(242, 237, 228, 0.2);
+        border: 1px solid rgba(242, 237, 228, 0.07);
+        padding: 4px 10px;
+        border-radius: 100px;
         letter-spacing: 0.5px;
       }
-      .footer-year {
-        font-family: "Oswald", sans-serif;
-        font-size: 14px;
-        color: rgba(245, 240, 232, 0.2);
-        letter-spacing: 2px;
+      .ft-copy {
+        font-size: 11px;
+        color: rgba(242, 237, 228, 0.2);
+        font-weight: 300;
       }
 
-      /* MOBILE */
+      /* ─── ANIMATIONS ─── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up {
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards;
+      }
+      .d1 {
+        animation-delay: 0.1s;
+      }
+      .d2 {
+        animation-delay: 0.25s;
+      }
+      .d3 {
+        animation-delay: 0.4s;
+      }
+      .d4 {
+        animation-delay: 0.55s;
+      }
+      .d5 {
+        animation-delay: 0.7s;
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .hero-right {
+          display: none;
+        }
+        .srv-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .srv-card:nth-child(3n) {
+          border-right: 2px solid var(--ink);
+        }
+        .srv-card:nth-child(even) {
+          border-right: none;
+        }
+        .srv-card:nth-last-child(-n + 2) {
+          border-bottom: none;
+        }
+        .srv-card:nth-last-child(1):nth-child(odd) {
+          border-right: none;
+        }
+        .price-grid {
+          grid-template-columns: 1fr;
+        }
+        .p-card.hot {
+          order: -1;
+        }
+        .why-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 768px) {
+        nav {
+          padding: 0 20px;
+        }
         .nav-links {
           display: none;
         }
-        .hamburger {
+        .hbg {
           display: flex;
         }
-        .hero-buttons {
-          flex-direction: column;
+        .hero {
+          padding: 90px 20px 60px;
         }
-        .hero-buttons .btn-primary,
-        .hero-buttons .btn-outline {
-          width: 100%;
-          text-align: center;
+        .s-wrap {
+          padding: clamp(48px, 8vw, 80px) 20px;
         }
-
-        /* Services — 1 sütun */
-        .services-grid {
+        .identity {
+          padding: 16px 20px;
+        }
+        .srv-grid {
           grid-template-columns: 1fr;
         }
         .srv-card {
           border-right: none !important;
         }
-        .srv-card:nth-last-child(-n + 2) {
-          border-bottom: 1px solid var(--black) !important;
+        .srv-card:not(:last-child) {
+          border-bottom: 2px solid var(--ink) !important;
         }
         .srv-card:last-child {
           border-bottom: none !important;
         }
-
-        /* Pricing — 1 sütun */
-        .pricing-grid {
-          grid-template-columns: 1fr;
-          gap: 12px;
+        .hero-btns {
+          flex-direction: column;
         }
-        .price-card.featured {
-          order: -1;
+        .hero-btns .btn-acid,
+        .hero-btns .btn-ghost {
+          width: 100%;
+          justify-content: center;
         }
-
-        /* Perks — 1 sütun */
-        .perks-grid {
-          grid-template-columns: 1fr;
+        .cta-inner {
+          flex-direction: column;
         }
-        .perk-card {
-          flex-direction: row;
-          text-align: left;
-          padding: 20px 18px;
-          gap: 16px;
+        .cta-right {
+          max-width: 100%;
         }
-        .perk-icon {
-          margin: 0;
+        .btn-ink {
+          width: 100%;
+          justify-content: center;
         }
-
-        .cta-box {
+        footer {
+          padding: 20px;
           flex-direction: column;
           align-items: flex-start;
-        }
-        .cta-box .btn-primary {
-          width: 100%;
-          text-align: center;
         }
       }
 
       @media (max-width: 480px) {
-        .author-right {
-          display: none;
-        }
-        .footer-tags {
-          gap: 6px;
-        }
-        /* Çox kiçik ekranlarda hero rəqəmi tamamilə gizlə */
-        .hero-bg-num {
+        .id-right {
           display: none;
         }
       }
     </style>
   </head>
   <body>
+    <!-- NAV -->
     <nav>
-      <div class="nav-logo">Elcan Məmmədov</div>
+      <div class="nav-logo">Elcan<span>.</span></div>
       <ul class="nav-links">
         <li><a href="#xidmetler">Xidmətlər</a></li>
-        <li><a href="#qiymet">Qiymət</a></li>
-        <li><a href="#ustunlukler">Üstünlüklər</a></li>
-        <li><a href="#elaqe" class="nav-cta">Əlaqə</a></li>
+        <li><a href="#qiymet">Qiymətlər</a></li>
+        <li><a href="#niye">Niyə Biz</a></li>
+        <li><a href="#elaqe" class="nav-pill">Əlaqə</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menyu">
+      <button class="hbg" id="hbg" aria-label="Menyu">
         <span></span><span></span><span></span>
       </button>
     </nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#xidmetler" class="mob-link">Xidmətlər</a>
-      <a href="#qiymet" class="mob-link">Qiymət</a>
-      <a href="#ustunlukler" class="mob-link">Üstünlüklər</a>
-      <a href="#elaqe" class="mob-link m-cta">Əlaqə</a>
+    <div class="mob-menu" id="mobMenu">
+      <a href="#xidmetler" class="mob-lnk">Xidmətlər</a>
+      <a href="#qiymet" class="mob-lnk">Qiymətlər</a>
+      <a href="#niye" class="mob-lnk">Niyə Biz</a>
+      <a href="#elaqe" class="mob-lnk mob-cta">Əlaqə</a>
     </div>
 
+    <!-- HERO -->
     <section class="hero">
-      <div class="hero-bg-num">8</div>
-      <div class="hero-badge">Tam Həll Paketi · 2026</div>
-      <h1 class="hero-title">
-        Biznesinizi<br />
-        <span class="lime">Rəqəmsal</span><br />
-        Dünyaya<br />
-        Daşıyırıq
-      </h1>
-      <p class="hero-sub">
-        Veb saytdan süni intellektə — ERP-dən onlayn təhsilə qədər bütün
-        xidmətlər sizin üçün.
-      </p>
-      <div class="hero-buttons">
-        <a href="#elaqe" class="btn-primary">Pulsuz Məsləhət Al</a>
-        <a href="#xidmetler" class="btn-outline">Xidmətlərə Bax</a>
+      <div class="hero-left">
+        <div class="hero-eyebrow fade-up d1">
+          <span class="eyebrow-dot"></span>
+          <span class="eyebrow-text">Tam Rəqəmsal Həll · Bakı, 2026</span>
+        </div>
+        <h1 class="hero-h1 fade-up d2">
+          Biznesiniz<br />
+          <span class="italic-serif">rəqəmsal</span><br />
+          dünyanın<br />
+          <span class="acid">mərkəzinə.</span>
+        </h1>
+        <p class="hero-sub fade-up d3">
+          Saytdan <strong>ERP sistemlərinə</strong>, süni intellektdən
+          <strong>korporativ e-poçta</strong> qədər — hər həll bir çatı altında,
+          bir komanda ilə, bir partnyorla.
+        </p>
+        <div class="hero-btns fade-up d4">
+          <a href="https://wa.me/994504180032" target="_blank" class="btn-acid">
+            Pulsuz Məsləhət Al
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#xidmetler" class="btn-ghost">Xidmətlərə Bax</a>
+        </div>
+      </div>
+
+      <div class="hero-right fade-up d5">
+        <div class="hero-stats-card">
+          <div class="stat-item">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Tamamlanan Layihə</div>
+            <div class="stat-desc">
+              Kiçik biznesdən korporativ şirkətlərə qədər hər ölçüdə.
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">1 İl</div>
+            <div class="stat-label">Zəmanətli Texniki Dəstək</div>
+            <div class="stat-desc">
+              Təhvildən sonra da yanınızdayıq — heç bir əlavə xərc yoxdur.
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3×</div>
+            <div class="stat-label">Daha Sürətli Böyümə</div>
+            <div class="stat-desc">
+              Rəqəmsal çevrilmə keçirmiş müştərilərimizin ortalama nəticəsi.
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="author-strip">
-      <div class="author-left">
-        <div class="avatar">EM</div>
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span class="marquee-item"
+          >Veb Sayt <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >ERP Sistemi <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >AI İnteqrasiya <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >CRM Həlli <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Korporativ E-poçt <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Proqramlaşdırma <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Texniki Dəstək <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Veb Sayt <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >ERP Sistemi <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >AI İnteqrasiya <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >CRM Həlli <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Korporativ E-poçt <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Proqramlaşdırma <span class="marquee-dot">✦</span></span
+        >
+        <span class="marquee-item"
+          >Texniki Dəstək <span class="marquee-dot">✦</span></span
+        >
+      </div>
+    </div>
+
+    <!-- IDENTITY -->
+    <div class="identity">
+      <div class="id-left">
+        <div class="id-avatar">EM</div>
         <div>
-          <div class="author-name">Elcan Məmmədov</div>
-          <div class="author-role">Texnologiya &amp; Biznes Həlləri</div>
+          <div class="id-name">Elcan Məmmədov</div>
+          <div class="id-role">
+            Texnologiya &amp; Biznes Həlləri — Bakı, Azərbaycan
+          </div>
         </div>
       </div>
-      <div class="author-right">elcan.dev</div>
+      <div class="id-right">
+        <span class="id-tag">elcan.dev</span>
+        <span class="id-tag">WhatsApp: +994 50 418 00 32</span>
+      </div>
     </div>
 
-    <div class="wave">
-      <svg
-        viewBox="0 0 1440 40"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        height="40"
-      >
-        <rect width="1440" height="40" fill="#e8e4dc" />
-        <path
-          d="M0,0 Q360,40 720,20 Q1080,0 1440,30 L1440,0 Z"
-          fill="#c8f55a"
-        />
-      </svg>
-    </div>
-
-    <div id="xidmetler" style="background: var(--gray-bg)">
-      <div class="section">
-        <div class="section-label">Nə Təklif Edirik</div>
-        <div class="section-title">Xidmətlər</div>
-        <div class="services-grid">
+    <!-- SERVICES -->
+    <section id="xidmetler" class="services-bg">
+      <div class="s-wrap">
+        <div class="s-label">Nə Təklif Edirik</div>
+        <div class="s-title">Xidmətlər</div>
+        <p class="s-sub">
+          Hər biznes fərqlidir. Biz də hər həlli sıfırdan, sizin üçün inşa
+          edirik.
+        </p>
+        <div class="srv-grid">
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4M7 7h.01M11 7h6M7 11h10" />
-              </svg>
-            </div>
-            <div>
+            <div class="srv-inner">
+              <div class="srv-num">01</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4" />
+                </svg>
+              </div>
               <div class="srv-name">Peşəkar Veb Sayt</div>
               <div class="srv-desc">
-                İstənilən növ biznes üçün fərdi dizayn və funksional sayt
+                Ziyarətçini müştəriyə çevirmək üçün nəzərdə tutulmuş, sürətli,
+                mobil-uyğun, fərdi dizaynlı saytlar.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
+
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="2" y="7" width="6" height="10" rx="1" />
-                <rect x="9" y="3" width="6" height="14" rx="1" />
-                <rect x="16" y="9" width="6" height="8" rx="1" />
-                <path d="M5 21h14" />
-              </svg>
-            </div>
-            <div>
-              <div class="srv-name">ERP &amp; CRM İnteqrasiyası</div>
+            <div class="srv-inner">
+              <div class="srv-num">02</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2" y="7" width="6" height="10" rx="1" />
+                  <rect x="9" y="3" width="6" height="14" rx="1" />
+                  <rect x="16" y="9" width="6" height="8" rx="1" />
+                  <path d="M5 21h14" />
+                </svg>
+              </div>
+              <div class="srv-name">ERP &amp; CRM İnteqrasiya</div>
               <div class="srv-desc">
-                İş proseslərinin tam inteqrasiyası və optimallaşdırılması
+                Satış, anbar, mühasibat — hamısı bir sistemdə. İnsan səhvini
+                aradan qaldırın, vaxtı geri qaytarın.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
+
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="3" />
-                <path
-                  d="M12 3v2M12 19v2M3 12h2M19 12h2M5.64 5.64l1.42 1.42M16.95 16.95l1.41 1.41M5.64 18.36l1.42-1.42M16.95 7.05l1.41-1.41"
-                />
-                <circle cx="12" cy="12" r="7" stroke-dasharray="2 2" />
-              </svg>
-            </div>
-            <div>
+            <div class="srv-inner">
+              <div class="srv-num">03</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"
+                  />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+              </div>
               <div class="srv-name">Süni İntellekt (AI)</div>
               <div class="srv-desc">
-                AI inteqrasiyası və avtomatlaşdırma həlləri
+                Chatbot, məzmun yaratma, analitika — AI-nı rəqibinizin önünə
+                keçmək üçün işlə vurun.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
+
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="M2 8l10 7 10-7" />
-              </svg>
-            </div>
-            <div>
+            <div class="srv-inner">
+              <div class="srv-num">04</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 8l10 7 10-7" />
+                </svg>
+              </div>
               <div class="srv-name">Korporativ E-poçt</div>
               <div class="srv-desc">
-                Brend ünvanların yaradılması, quraşdırılması və idarə edilməsi
+                siz@sizinşirket.az — brend ünvanı peşəkarlığın ilk addımıdır.
+                Quraşdırma, idarəetmə bizdən.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
+
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-                <line x1="14" y1="4" x2="10" y2="20" />
-              </svg>
-            </div>
-            <div>
+            <div class="srv-inner">
+              <div class="srv-num">05</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>
+              </div>
               <div class="srv-name">Onlayn Proqramlaşdırma</div>
               <div class="srv-desc">
-                Müasir proqramlaşdırma dərsləri və mentorluq
+                Python, web, verilənlər bazası — komandanızı və ya özünüzü
+                texnologiya ilə gücləndirin.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
+
           <div class="srv-card">
-            <div class="srv-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <path d="M9 12l2 2 4-4" />
-              </svg>
-            </div>
-            <div>
-              <div class="srv-name">Texniki Dəstək</div>
+            <div class="srv-inner">
+              <div class="srv-num">06</div>
+              <div class="srv-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="srv-name">1 İl Texniki Dəstək</div>
               <div class="srv-desc">
-                1 il müddətində fasiləsiz tam texniki xidmət
+                Layihə bitmir — o, başlayır. Hər sual, hər güncəlləmə, hər
+                problem üçün bir zəng kifayətdir.
+              </div>
+              <div class="srv-arrow">
+                Ətraflı
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="qiymet" class="pricing-section">
-      <div class="pricing-inner">
-        <div class="section-label">Sərfəli Paketlər</div>
-        <div class="section-title">Qiymət Siyahısı</div>
-        <div class="pricing-grid">
-          <div class="price-card">
-            <div class="price-name">Başlanğıc</div>
-            <div class="price-row">
-              <div class="price-amount">499</div>
-              <div class="price-currency">AZN</div>
-            </div>
-            <div class="price-period">bir dəfəlik ödəniş</div>
-            <div class="price-divider"></div>
-            <ul class="price-features">
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
-                ></span>
-                5 səhifəlik veb sayt
-              </li>
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
-                ></span>
-                Mobil uyğunluq
-              </li>
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
-                ></span>
-                Korporativ e-poçt
-              </li>
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
-                ></span>
-                Domen + Hosting (1 il)
-              </li>
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg
-                ></span>
-                3 ay texniki dəstək
-              </li>
-            </ul>
-            <a
-              href="https://wa.me/994504180032"
-              target="_blank"
-              class="price-btn"
-              >Seçim et</a
-            >
-          </div>
+    <!-- PRICING -->
+    <section id="qiymet" class="pricing-bg">
+      <div class="s-wrap">
+        <div class="s-label">Sərfəli Paketlər</div>
+        <div class="s-title">Qiymət Siyahısı</div>
+        <p class="s-sub">
+          Şəffaf qiymət. Gizli xərc yoxdur. Büdcənizə uyğun ödəniş planı.
+        </p>
 
-          <div class="price-card featured">
-            <div class="price-badge">Ən Populyar</div>
-            <div class="price-name">Biznes</div>
-            <div class="price-row">
-              <div class="price-amount">999</div>
-              <div class="price-currency">AZN</div>
-            </div>
-            <div class="price-period">bir dəfəlik ödəniş</div>
-            <div class="price-divider"></div>
-            <ul class="price-features">
+        <div class="price-grid">
+          <!-- Başlanğıc -->
+          <div class="p-card">
+            <div class="p-name">Başlanğıc</div>
+            <div class="p-price"><span class="p-currency">₼</span>499</div>
+            <div class="p-period">bir dəfəlik · hissəli ödəniş mümkün</div>
+            <div class="p-divider"></div>
+            <ul class="p-list">
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Limitsiz səhifə
+                >5 səhifəlik fərdi sayt
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >ERP / CRM inteqrasiyası
+                >Mobil &amp; tablet uyğunluq
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >AI inteqrasiyası
-              </li>
-              <li>
-                <span class="check"
-                  ><svg
-                    viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
@@ -1191,201 +1601,301 @@
                 >Korporativ e-poçt
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Domen + Hosting (1 il)
+                >Domen + Hosting (1 il hədiyyə)
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >1 il texniki dəstək
+                >3 ay texniki dəstək
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Hissə-hissə ödəniş
+                >SEO əsas optimallaşma
               </li>
             </ul>
-            <a
-              href="https://wa.me/994504180032"
-              target="_blank"
-              class="price-btn"
-              >Seçim et</a
+            <a href="https://wa.me/994504180032" target="_blank" class="p-btn"
+              >Seçim et →</a
             >
           </div>
 
-          <div class="price-card">
-            <div class="price-name">Korporativ</div>
-            <div class="price-row">
-              <div class="price-amount-text">Fərdi</div>
-            </div>
-            <div class="price-period">Layihəyə görə qiymət</div>
-            <div class="price-divider"></div>
-            <ul class="price-features">
+          <!-- Biznes / HOT -->
+          <div class="p-card hot">
+            <div class="p-tag">Ən Populyar</div>
+            <div class="p-name">Biznes</div>
+            <div class="p-price"><span class="p-currency">₼</span>999</div>
+            <div class="p-period">bir dəfəlik · rahat hissəli ödəniş</div>
+            <div class="p-divider"></div>
+            <ul class="p-list">
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Tam fərdi həll
+                >Limitsiz səhifə
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >ERP + CRM + AI
+                >ERP / CRM inteqrasiyası
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Onlayn proqramlaşdırma
+                >AI chatbot inteqrasiyası
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Dedicated dəstək
+                >Korporativ e-poçt sistemi
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Domen + Hosting (1 il)
+                >Domen + Hosting (1 il hədiyyə)
               </li>
               <li>
-                <span class="check"
+                <span class="p-check"
                   ><svg
                     viewBox="0 0 10 10"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-width="2.2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
-                >Özəl ödəniş planı
+                >1 il tam texniki dəstək
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Analitika &amp; hesabat paneli
               </li>
             </ul>
-            <a
-              href="https://wa.me/994504180032"
-              target="_blank"
-              class="price-btn"
-              >Əlaqə saxla</a
+            <a href="https://wa.me/994504180032" target="_blank" class="p-btn"
+              >İndi Başla →</a
+            >
+          </div>
+
+          <!-- Korporativ -->
+          <div class="p-card">
+            <div class="p-name">Korporativ</div>
+            <div class="p-custom">Fərdi</div>
+            <div class="p-period">layihəyə görə qiymətləndirmə</div>
+            <div class="p-divider"></div>
+            <ul class="p-list">
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Tam fərdi arxitektura
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >ERP + CRM + AI kompleks
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Komanda üçün proqramlaşdırma
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Dedicated hesab meneceri
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Domen + Hosting (1 il hədiyyə)
+              </li>
+              <li>
+                <span class="p-check"
+                  ><svg
+                    viewBox="0 0 10 10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="1.5,5 4,7.5 8.5,2.5" /></svg></span
+                >Özəl SLA ödəniş planı
+              </li>
+            </ul>
+            <a href="https://wa.me/994504180032" target="_blank" class="p-btn"
+              >Əlaqə Saxla →</a
             >
           </div>
         </div>
-        <p class="price-note">
-          Bütün paketlərdə hissə-hissə ödəniş imkanı var — pulsuz məsləhət üçün
-          bizimlə əlaqə saxlayın.
+        <p class="p-note">
+          Bütün paketlər üzrə pulsuz ilkin məsləhət — heç bir öhdəlik
+          olmadan.<br />Hissəli ödəniş seçimi hər paketin daxilindədir.
         </p>
       </div>
-    </div>
+    </section>
 
-    <section id="ustunlukler" class="perks-section">
-      <div class="perks-inner">
-        <div class="section-label">Niyə Biz</div>
-        <div class="section-title">Üstünlüklərimiz</div>
-        <div class="perks-grid">
-          <div class="perk-card lime-card">
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M20 12V22H4V12" />
-                <path d="M22 7H2v5h20V7z" />
-                <path d="M12 22V7" />
-                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
-                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
-              </svg>
-            </div>
-            <div>
-              <div class="perk-title">Domen + Hosting Hədiyyə</div>
-              <div class="perk-sub">
-                İlk il tamamilə pulsuz — xərclərini azaldırıq
+    <!-- WHY -->
+    <section id="niye" class="why-bg">
+      <div class="s-wrap">
+        <div class="why-grid">
+          <div class="why-left">
+            <div class="s-label">Niyə Biz</div>
+            <div class="s-title">Üstünlüklərimiz</div>
+            <p class="s-sub">
+              Biz sadəcə sayt hazırlamırıq — biznesinizin rəqəmsal beynini inşa
+              edirik.
+            </p>
+            <div class="why-right" style="display: none"></div>
+          </div>
+          <div class="wbc-left">
+            <div class="wbc-big-card why-big-card">
+              <div class="wbc-label">Niyə Elcan Məmmədov?</div>
+              <div class="wbc-title">Bir Partnyorla<br />Hər Şey</div>
+              <div class="wbc-body">
+                Fərqli şirkətlərə zəng etmək, fərqli texniki insanlara izah
+                etmək, aylarca gözləmək — bu sizi yorur.
+                <strong>Biz bunu dəyişirik.</strong> Dizayndan serverə, ERP-dən
+                AI-a qədər hər şey bir komanda tərəfindən, bir qiymətə.
+              </div>
+              <div class="wbc-perks">
+                <div class="wbc-perk">
+                  <div class="wbc-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M20 12V22H4V12" />
+                      <path d="M22 7H2v5h20V7z" />
+                      <path d="M12 22V7" />
+                      <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                      <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                    </svg>
+                  </div>
+                  <div class="wbc-perk-text">
+                    <strong>Domen + Hosting</strong> — ilk il tamamilə hədiyyə
+                  </div>
+                </div>
+                <div class="wbc-perk">
+                  <div class="wbc-icon">
+                    <svg viewBox="0 0 24 24">
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                  </div>
+                  <div class="wbc-perk-text">
+                    <strong>Hissəli ödəniş</strong> — büdcənizə uyğun plan
+                  </div>
+                </div>
+                <div class="wbc-perk">
+                  <div class="wbc-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                  </div>
+                  <div class="wbc-perk-text">
+                    <strong>1 il zəmanətli dəstək</strong> — təhvildən sonra da
+                    yanınızda
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="perk-card">
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                <line x1="1" y1="10" x2="23" y2="10" />
-                <path d="M7 15h2M11 15h6" />
-              </svg>
-            </div>
-            <div>
-              <div class="perk-title">Hissə-hissə Ödəniş</div>
-              <div class="perk-sub">Büdcənizə uyğun çevik ödəniş planı</div>
+        </div>
+
+        <!-- why items row -->
+        <div style="margin-top: 56px">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div class="why-text">
+              <div class="why-title">Sürət — Vaxtınız Puldur</div>
+              <div class="why-desc">
+                Standart saytlar 4–8 həftə çəkir. Biz sürətli prototip, iterativ
+                inkişaf və cəld çatdırma ilə işləyirik. Çünki bazarda hər gün
+                gecikmək bahalıya başa gəlir.
+              </div>
             </div>
           </div>
-          <div class="perk-card">
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <polyline points="9 12 11 14 15 10" />
-              </svg>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div class="why-text">
+              <div class="why-title">Şəffaflıq — Gizli Xərc Yoxdur</div>
+              <div class="why-desc">
+                Qiymət siyahısı ictimai, müqavilə aydın, hər addım izah olunur.
+                Sürpriz faktura almayacaqsınız — söz.
+              </div>
             </div>
-            <div>
-              <div class="perk-title">1 İl Texniki Dəstək</div>
-              <div class="perk-sub">
-                Layihə təslimindən sonra tam bir il yanınızdayıq
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div class="why-text">
+              <div class="why-title">Nəticə — Estetika Deyil, Dönüşüm</div>
+              <div class="why-desc">
+                Gözəl sayt kifayət deyil. Ziyarətçini müştəriyə çevirmək üçün
+                psixoloji dizayn, CTA strategiyası və analitika ilə işləyirik.
               </div>
             </div>
           </div>
@@ -1393,54 +1903,121 @@
       </div>
     </section>
 
-    <section id="elaqe">
-      <div class="cta-section">
-        <div class="cta-box">
-          <div>
-            <div class="cta-big">Pulsuz Məsləhət</div>
-            <div class="cta-small">
-              Layihənizi birlikdə planlaşdırırıq — heç bir öhdəçilik yoxdur
-            </div>
+    <!-- CTA -->
+    <section id="elaqe" class="cta-bg">
+      <div class="s-wrap">
+        <div class="cta-inner">
+          <div class="cta-heading">
+            Hazırsınız?<br />
+            <em>Başlayaq.</em>
           </div>
-          <a
-            href="https://wa.me/994504180032"
-            target="_blank"
-            class="btn-primary"
-            >Əlaqə Saxla →</a
-          >
+          <div class="cta-right">
+            <p class="cta-body">
+              İlk məsləhət tamamilə pulsuzdur. Layihənizi danışın, qiymət
+              təklifi alın — heç bir öhdəlik olmadan.
+            </p>
+            <a
+              href="https://wa.me/994504180032"
+              target="_blank"
+              class="btn-ink"
+            >
+              WhatsApp-da Yaz
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <p
+              style="
+                font-size: 11px;
+                color: rgba(13, 13, 13, 0.45);
+                font-weight: 300;
+              "
+            >
+              +994 50 418 00 32 · elcan.dev
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
-      <div class="footer-tags">
-        <span class="ftag">#WebDesign</span>
-        <span class="ftag">#ERP</span>
-        <span class="ftag">#AI</span>
-        <span class="ftag">#Texnologiya</span>
-        <span class="ftag">#Azərbaycan</span>
-        <span class="ftag">#ElcanMəmmədov</span>
+      <div class="ft-logo">Elcan Məmmədov © 2026</div>
+      <div class="ft-tags">
+        <span class="ft-tag">#WebDesign</span>
+        <span class="ft-tag">#ERP</span>
+        <span class="ft-tag">#AI</span>
+        <span class="ft-tag">#Texnologiya</span>
+        <span class="ft-tag">#Azərbaycan</span>
       </div>
-      <span class="footer-year">© 2026</span>
+      <div class="ft-copy">Bakı, Azərbaycan · 2026</div>
     </footer>
 
     <script>
-      const btn = document.getElementById("hamburger");
-      const menu = document.getElementById("mobileMenu");
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("open");
-        menu.classList.toggle("open");
-        document.body.style.overflow = menu.classList.contains("open")
+      // hamburger
+      const hbg = document.getElementById("hbg");
+      const mob = document.getElementById("mobMenu");
+      hbg.addEventListener("click", () => {
+        hbg.classList.toggle("open");
+        mob.classList.toggle("open");
+        document.body.style.overflow = mob.classList.contains("open")
           ? "hidden"
           : "";
       });
-      document.querySelectorAll(".mob-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          btn.classList.remove("open");
-          menu.classList.remove("open");
+      document.querySelectorAll(".mob-lnk").forEach((l) =>
+        l.addEventListener("click", () => {
+          hbg.classList.remove("open");
+          mob.classList.remove("open");
           document.body.style.overflow = "";
+        }),
+      );
+
+      // why-grid responsive fix
+      function fixWhy() {
+        const wl = document.querySelector(".why-left");
+        const wr = document.querySelector(".why-right");
+        const wg = document.querySelector(".why-grid");
+        const wbc = document.querySelector(".wbc-left");
+        if (!wl || !wbc) return;
+        if (window.innerWidth <= 900) {
+          wg.style.gridTemplateColumns = "1fr";
+        } else {
+          wg.style.gridTemplateColumns = "1fr 1fr";
+        }
+      }
+      fixWhy();
+      window.addEventListener("resize", fixWhy);
+
+      // Intersection Observer fade-in for sections
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.opacity = "1";
+              e.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".srv-card, .p-card, .why-item, .wbc-big-card")
+        .forEach((el) => {
+          el.style.transition = "opacity .6s ease, transform .6s ease";
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          obs.observe(el);
         });
-      });
     </script>
   </body>
 </html>
